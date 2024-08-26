@@ -1,0 +1,16 @@
+server:
+  port: 9100
+  servlet:
+    context-path: /conformity-gateway
+
+spring:
+  application:
+    name: conformity-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.170.21.199:8848,192.170.21.167:8850,192.170.21.192:8852
+        namespace: spring-cloud-conformity
+        group: spring-cloud-conformity
+        username: nacos
+        password: nacos
