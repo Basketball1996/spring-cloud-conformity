@@ -25,8 +25,8 @@ public class SpringCloudUserServiceImpl extends ServiceImpl<SpringCloudUserMappe
     @Override
     public Page<SpringCloudUser> queryCloudUser(PageDTO<SpringCloudUser> pageDTO) {
 
-        LambdaQueryWrapper<SpringCloudUser> wrapper = Wrappers.lambdaQuery();
         Page<SpringCloudUser> page = new Page<>(pageDTO.getPageNo(), pageDTO.getPageSize());
+        LambdaQueryWrapper<SpringCloudUser> wrapper = Wrappers.lambdaQuery();
         wrapper.like(StringUtils.isNotBlank(pageDTO.getParam().getUserName()), SpringCloudUser::getUserName, pageDTO.getParam().getUserName());
         return this.page(page, wrapper);
     }
