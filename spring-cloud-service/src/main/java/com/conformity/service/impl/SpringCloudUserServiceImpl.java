@@ -9,10 +9,9 @@ import com.conformity.dal.model.SpringCloudUser;
 import com.conformity.dto.PageDTO;
 import com.conformity.service.SpringCloudUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Objects;
 
 /**
  * @author guolei
@@ -27,7 +26,7 @@ public class SpringCloudUserServiceImpl extends ServiceImpl<SpringCloudUserMappe
 
         Page<SpringCloudUser> page = new Page<>(pageDTO.getPageNo(), pageDTO.getPageSize());
         LambdaQueryWrapper<SpringCloudUser> wrapper = Wrappers.lambdaQuery();
-        wrapper.like(StringUtils.isNotBlank(pageDTO.getParam().getUserName()), SpringCloudUser::getUserName, pageDTO.getParam().getUserName());
+        wrapper.like(Objects.nonNull(pageDTO.getParam()), SpringCloudUser::getUserName, pageDTO.getParam().getUserName());
         return this.page(page, wrapper);
     }
 }
