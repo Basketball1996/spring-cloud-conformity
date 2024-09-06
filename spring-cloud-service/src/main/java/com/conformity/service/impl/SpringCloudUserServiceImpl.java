@@ -11,7 +11,7 @@ import com.conformity.service.SpringCloudUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author guolei
@@ -23,7 +23,6 @@ import java.util.Objects;
 public class SpringCloudUserServiceImpl extends ServiceImpl<SpringCloudUserMapper, SpringCloudUser> implements SpringCloudUserService {
     @Override
     public Page<SpringCloudUser> queryCloudUser(PageDTO<SpringCloudUser> pageDTO) {
-
         Page<SpringCloudUser> page = new Page<>(pageDTO.getPageNo(), pageDTO.getPageSize());
         LambdaQueryWrapper<SpringCloudUser> wrapper = Wrappers.lambdaQuery();
         wrapper.like(Objects.nonNull(pageDTO.getParam()), SpringCloudUser::getUserName, pageDTO.getParam().getUserName());
