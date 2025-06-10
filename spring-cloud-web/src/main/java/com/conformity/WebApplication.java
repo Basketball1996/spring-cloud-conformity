@@ -11,7 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 
 @SpringBootApplication(scanBasePackages = "com.conformity")
-@MapperScan("com.conformity.dal.mapper")
+@MapperScan(basePackages = "com.conformity.dal.mapper")
 @EnableDiscoveryClient
 public class WebApplication {
     public static void main(String[] args) {

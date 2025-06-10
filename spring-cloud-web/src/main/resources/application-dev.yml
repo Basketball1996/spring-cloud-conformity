@@ -9,18 +9,18 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.170.21.199:8848,192.170.21.167:8850,192.170.21.192:8852
+        server-addr: 173.21.122.170:8848,173.21.122.153:8850,173.21.122.35:8852
         namespace: spring-cloud-conformity
         group: spring-cloud-conformity
         username: nacos
         password: nacos
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://173.21.122.35:3306/spring_cloud_conformity?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
-      url: jdbc:mysql://192.170.21.192:3306/spring_cloud_conformity?useSSL=false&serverTimezone=UTC
-      username: root
-      password: root
-      driver-class-name: com.mysql.cj.jdbc.Driver
       #配置初始化大小、最小、最大线程数
       initial-size: 5
       min-idle: 5
@@ -48,3 +48,18 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.conformity.dal.model
+
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true    # 开启knife4j,无需添加@EnableKnife4j注解
+  setting:
+    language: zh_cn   #中文
+    swagger-model-name: 实体列表   #默认为: Swagger Models
+  basic: # 开启Swagger的Basic认证功能,默认是false
+    enable: true
+    username: admin
+    password: 123456

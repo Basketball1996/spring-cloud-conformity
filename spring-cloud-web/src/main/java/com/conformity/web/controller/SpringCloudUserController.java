@@ -1,36 +1,40 @@
 package com.conformity.web.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.conformity.dal.model.SpringCloudUser;
 import com.conformity.dto.PageDTO;
+import com.conformity.result.Result;
+import com.conformity.result.ResultUtil;
 import com.conformity.service.SpringCloudUserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
 
 /**
  * @author guolei
  * @since 2024/7/22 16:14
  */
 
-@Api(tags = "用户管理")
+@Tag(name = "用户管理")
 @RestController
 @RequestMapping("/springCloudUser")
-@Slf4j
 public class SpringCloudUserController {
 
-    @Resource
+    @Autowired
     private SpringCloudUserService springCloudUserService;
 
-    @PostMapping("/querySpringCloudList")
+    @PostMapping("/addSpringCloudUser")
     @ResponseBody
-    @ApiOperation(value = "查询用户", notes = "查询用户")
-    public Page<SpringCloudUser> querySpringCloudList(@RequestBody PageDTO<SpringCloudUser> pageDTO) {
-        log.info("查询cloud用户入参:{}", JSONObject.toJSONString(pageDTO));
-        return springCloudUserService.queryCloudUser(pageDTO);
+    @Operation(summary = "新增springCloud用户")
+    public Result<Boolean> addSpringCloudUser(@RequestBody SpringCloudUser springCloudUser) {
+        return ResultUtil.success(springCloudUserService.addSpringCloudUser(springCloudUser));
+    }
+
+    @PostMapping("/querySpringCloudUserList")
+    @ResponseBody
+    @Operation(summary = "查询springCloud用户", description = "查询springCloud用户")
+    public Result<Page<SpringCloudUser>> querySpringCloudList(@RequestBody PageDTO<SpringCloudUser> pageDTO) {
+        return ResultUtil.success(springCloudUserService.queryCloudUser(pageDTO));
     }
 }

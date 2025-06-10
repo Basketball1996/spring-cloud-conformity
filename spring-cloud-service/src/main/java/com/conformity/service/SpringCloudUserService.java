@@ -14,9 +14,16 @@ import java.util.List;
 public interface SpringCloudUserService extends IService<SpringCloudUser> {
 
     /**
-     * 分页查询用户
+     * 分页查询SpringCloud用户
      * @param pageDTO
      * @return
      */
     Page<SpringCloudUser> queryCloudUser(PageDTO<SpringCloudUser> pageDTO);
+
+    /**
+     * 新增springCloud用户
+     * @param springCloudUser
+     * @return
+     */
+    boolean addSpringCloudUser(SpringCloudUser springCloudUser);
 }

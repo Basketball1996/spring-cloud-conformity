@@ -1,5 +1,8 @@
 package com.conformity.constanst;
 
+/**
+ * @author guolei
+ */
 public class CommonConstants {
 
     /**

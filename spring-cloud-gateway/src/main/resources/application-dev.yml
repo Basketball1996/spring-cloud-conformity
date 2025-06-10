@@ -9,7 +9,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.170.21.199:8848,192.170.21.167:8850,192.170.21.192:8852
+        server-addr: 173.21.122.153:8848,173.21.122.170:8850,173.21.122.35:8852
         namespace: spring-cloud-conformity
         group: spring-cloud-conformity
         username: nacos
