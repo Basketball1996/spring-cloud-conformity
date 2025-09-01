@@ -2,7 +2,7 @@ package com.conformity.gateway.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.shaded.com.google.common.base.Stopwatch;
-import com.conformity.UUIDUtils;
+import com.conformity.TraceUtils;
 import com.conformity.constanst.CommonConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -27,12 +27,12 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class TokenFilter implements GlobalFilter, Ordered {
-    private static final String TRACE_ID = "X-TRACEID";
+
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         Stopwatch stopWatch = Stopwatch.createStarted();
-        setTraceId();
+        TraceUtils.setTraceId();
         // 请求对象
         ServerHttpRequest request = exchange.getRequest();
         // 响应对象
@@ -71,7 +71,7 @@ public class TokenFilter implements GlobalFilter, Ordered {
                 log.warn("慢请求。{}请求耗时:{}ms", afterPath, elapsed);
             }
             log.info("{}->{}请求耗时:{}ms", beforePath, afterPath, elapsed);
-            MDC.remove(TRACE_ID);
+            TraceUtils.removeTraceId(CommonConstants.TRACE_ID);
         });
     }
 
@@ -80,7 +80,4 @@ public class TokenFilter implements GlobalFilter, Ordered {
         return 0;
     }
 
-    private void setTraceId() {
-        MDC.put(TRACE_ID, UUIDUtils.getUUID());
-    }
 }
